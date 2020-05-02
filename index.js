@@ -2,45 +2,66 @@ const inquirer = require('inquirer');
 const fs = require("fs");
 const generateMarkdown = require("./utils/generateMarkdown")
 
-//========QUESTIONS FOR EMPLOYEES
+//========QUESTIONS FOR MANAGERS
 
-const questions = [
+const initialQs = [
 {
     type: "input",
-    name:"employeeName",
-    message: "What is the name of the Team Manager who you're looking for?"
+    name: "managerName",
+    message: "What is the team manager's name?"
 },
 {
     type: "list",
-    name:"jobTitle",
-    message: "What is her/his job title?",
-    choices: ["Manager", "Engineer", "Intern"]
+    name: "jobTitle",
+    message: "Who is on her/his team?",
+    choices: ["Engineer", "Intern"]
 },
 {
     type: "input",
-    name:"idNumber",
-    message: "What is his/her ID number?"
-},
+    name: "managerID",
+    message: "What is the manager's ID number?"
+}
 {
     type: "input",
-    name:"email",
-    message: "What is her/his email address?"
-},
-{
-    type: "list",
-    name:"license",
-    message: "What licensing does it use?",
-    choices: ["Apache", "MIT", "ISC"]
-},
-{
-    type: "input",
-    name:"contributors",
-    message: "Who has contributed to your project?"
-},
-// 
-{
-    type: "input",
-    name: "questions",
-    message: "What's your github.com User Name?"
-},
+    name: "managerOffice",
+    message: "What is the manager's office number?"
+}
+
 ];
+
+//========QUESTIONS FOR ENGINEERS
+const engineerQs = [
+    {
+        type: "input",
+        name: "engineerName",
+        message: "What is the engineer's name?"
+    }
+    {
+        type: "input",
+        name: "engineerID",
+        message: "What is the engineer's ID number?"
+    }
+    {
+        type: "input",
+        name: "engineerGHUN",
+        message: "What is the engineer's github.com User Name?"
+    }
+];
+
+//========QUESTIONS FOR INTERNS
+const internQs = [
+    {
+        type: "input",
+        name: "internName",
+        message: "What is the intern's name?"
+    }
+    {
+        type: "input",
+        name: "internID",
+        message: "What is the intern's ID number?"
+    }
+    {
+        type: "input",
+        name: "internSchool",
+        message: "Where does the intern study?"
+    }
