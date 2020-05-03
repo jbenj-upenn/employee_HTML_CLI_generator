@@ -76,18 +76,28 @@ function writeToFile(fileName, data) {
       });
 }
 
-const askQuestions = async (managerQs) => {
+const askMQuestions = async (managerQs) => {
     const answers = await inquirer.prompt(questions).catch(err => err)
     // console.log(answers);
     return answers;
-}
-const askQuestions = async (engineerQs) => {
+};
+const askEQuestions = async (engineerQs) => {
     const answers = await inquirer.prompt(questions).catch(err => err)
     // console.log(answers);
     return answers;
-}
-const askQuestions = async (internQs) => {
+};
+const askIQuestions = async (internQs) => {
     const answers = await inquirer.prompt(questions).catch(err => err)
     // console.log(answers);
     return answers;
-}
+};
+
+//========ANSWERS TO HTML FILES
+
+// const init = async () => {
+//     const userAnswers = await askQuestions(questions);
+//  //    console.log(userAnswers);
+//     writeToFile("exampleREADME.md", userAnswers)
+//          }
+ 
+//  init();
