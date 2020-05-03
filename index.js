@@ -10,7 +10,7 @@ const initialQs = [
         type: "list",
         name: "addTeamMember",
         message: "Who do you want to add to the team?",
-        choices: ["Manager", "Engineer", "Intern", "No one else for now"]
+        choices: ["Manager", "Engineer", "Intern"]
     },
 ]
 
@@ -87,6 +87,16 @@ const internQs = [
     }
 ];
 
+// ============FINAL QUESTION
+// const finalQs = [
+//     {
+//         type: "list",
+//         name: "addTeamMember",
+//         message: "Who do you want to add to the team?",
+//         choices: ["Manager", "Engineer", "Intern", "No one else for now"]
+//     },
+// ];
+
 //======not necessary for now
 // function writeToFile(fileName, data) {
 //     fs.writeFile(fileName, generateMarkdown(data), function(err) {
@@ -115,6 +125,11 @@ const askEQuestions = async (engineerQs) => {
 };
 const askIQuestions = async (internQs) => {
     const answers = await inquirer.prompt(internQs).catch(err => err)
+    // console.log(answers);
+    return answers;
+};
+const askFQuestions = async (finalQs) => {
+    const answers = await inquirer.prompt(finalQs).catch(err => err)
     // console.log(answers);
     return answers;
 };
@@ -147,9 +162,6 @@ const init = async () => {
 
     //    console.log(userAnswers);
     // writeToFile("exampleREADME.md", userAnswers)
-
-
-
 
 //========ANSWERS TO HTML FILES
 
