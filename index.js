@@ -1,10 +1,17 @@
-const inquirer = require('inquirer');
-const fs = require("fs");
-const htmlRender = require("./lib/htmlRenderer")
 const Manager = require("./lib/Manager")
 const Engineer = require("./lib/Engineer")
 const Intern = require("./lib/Intern")
+
+const inquirer = require('inquirer');
+const fs = require("fs");
+const path = require("path");
+const render = require("./lib/htmlRenderer")
+
+const OUTPUT_DIR = path.resolve(__dirname, "output");
+const outputPath = path.join(OUTPUT_DIR, "team.html");
+
 // const generateMarkdown = require("generateMarkdown")
+
 const team = []
 
 //========INITIAL QUESTIONS
@@ -90,15 +97,15 @@ const internQs = [
     }
 ];
 
+
 // ============FINAL QUESTION
-// const finalQs = [
-//     {
-//         type: "list",
-//         name: "addTeamMember",
-//         message: "Who do you want to add to the team?",
-//         choices: ["Manager", "Engineer", "Intern", "No one else for now"]
-//     },
-// ];
+const finalQs = [
+    {
+        type: "confirm",
+        name: "continue",
+        message: "Would you like to add anyone else to the team?",
+    },
+];
 //============================
 
 //======not necessary for now
@@ -132,11 +139,23 @@ const askIQuestions = async (internQs) => {
     // console.log(answers);
     return answers;
 };
+
+//attempting to ask this yes/no question and start the process over if return is true/yes
 // const askFQuestions = async (finalQs) => {
-//     const answers = await inquirer.prompt(finalQs).catch(err => err)
-//     // console.log(answers);
-//     return answers;
-// };
+//     const answers = await inquirer.prompt(finalQs).catch(err => err);
+//     if(answers.continue === true) {
+//         askInitQuestions(initialQs);
+//     }else{
+        
+const createHTML = () => {
+            fs.writeFile(outputPath, render(team), function (err) {
+                if (err) {
+                    throw err;
+                }
+            });
+        }
+    // console.log(answers);
+   
 //===========================
 
 //=========CALL QUESTIONS
@@ -151,6 +170,7 @@ const init = async () => {
         console.log(newMan);
         team.push(newMan);
         console.log(team);
+
         //create new M class
 
         //once created push to an array 
@@ -171,12 +191,12 @@ const init = async () => {
         team.push(newInt);
         console.log(team);
 
-    } else {
-        const html = htmlRender(team)
-
-    }
+    // } else {
+    //     createHTML();
+    };
 }
 
+createHTML();
 
 //    console.log(userAnswers);
 // writeToFile("exampleREADME.md", userAnswers)
