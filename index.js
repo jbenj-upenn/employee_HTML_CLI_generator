@@ -5,11 +5,11 @@ const Intern = require("./lib/Intern")
 const inquirer = require('inquirer');
 const fs = require("fs");
 const path = require("path");
-const render = require("./lib/htmlRenderer")
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
+const render = require("./lib/htmlRenderer")
 // const generateMarkdown = require("generateMarkdown")
 
 const team = []
@@ -146,16 +146,16 @@ const askIQuestions = async (internQs) => {
 //     if(answers.continue === true) {
 //         askInitQuestions(initialQs);
 //     }else{
-        
+
 const createHTML = () => {
-            fs.writeFile(outputPath, render(team), function (err) {
-                if (err) {
-                    throw err;
-                }
-            });
+    fs.writeFile("team.html", render(team), function (err) {
+        if (err) {
+            throw err;
         }
-    // console.log(answers);
-   
+    });
+}
+// console.log(answers);
+
 //===========================
 
 //=========CALL QUESTIONS
@@ -170,7 +170,7 @@ const init = async () => {
         console.log(newMan);
         team.push(newMan);
         console.log(team);
-
+        createHTML();
         //create new M class
 
         //once created push to an array 
@@ -178,25 +178,27 @@ const init = async () => {
     } else if (addTeamMember === 'Engineer') {
         const userAnswers = await askEQuestions(engineerQs);
         console.log(userAnswers)
-        const newEng = new Engineer (userAnswers.engineerName, userAnswers.engineerID, userAnswers.engineerEmail, userAnswers.engineerGHUN);
+        const newEng = new Engineer(userAnswers.engineerName, userAnswers.engineerID, userAnswers.engineerEmail, userAnswers.engineerGHUN);
         console.log(newEng);
         team.push(newEng);
         console.log(team);
+        createHTML();
 
     } else if (addTeamMember === "Intern") {
         const userAnswers = await askIQuestions(internQs);
         console.log(userAnswers)
-        const newInt = new Intern (userAnswers.internName, userAnswers.internID, userAnswers.internEmail, userAnswers.internSchool);
+        const newInt = new Intern(userAnswers.internName, userAnswers.internID, userAnswers.internEmail, userAnswers.internSchool);
         console.log(newInt);
         team.push(newInt);
         console.log(team);
+        createHTML();
 
-    // } else {
-    //     createHTML();
+        // } else {
+        //     createHTML();
     };
 }
 
-createHTML();
+
 
 //    console.log(userAnswers);
 // writeToFile("exampleREADME.md", userAnswers)
