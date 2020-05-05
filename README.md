@@ -12,8 +12,11 @@ In the Computer Coding Bootcamp at the University of Pennsylvania, via Trilogy E
 -Inquirer
 -Jest
 
-## Demo Video
+## Demo Video and Screenshot
 https://drive.google.com/file/d/1B3IBSGMFqkbtwWB8lnU1FbpDyMlLcKC_/view
+
+![screenshot](https://user-images.githubusercontent.com/59940368/81109973-e7c18e00-8ee8-11ea-83be-77e0b469b5c4.png)
+
 
 
 ## Future Implementation(s)
