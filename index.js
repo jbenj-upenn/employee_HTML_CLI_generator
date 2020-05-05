@@ -20,7 +20,7 @@ const initialQs = [
         type: "list",
         name: "addTeamMember",
         message: "Who do you want to add to the team?",
-        choices: ["Manager", "Engineer", "Intern"]
+        choices: ["Manager", "Engineer", "Intern", "Done"]
     },
 ]
 
@@ -40,7 +40,11 @@ const managerQs = [
     {
         type: "input",
         name: "managerEmail",
-        message: "What is the manager's email address?"
+        message: "What is the manager's email address?",
+        validate: function (email) {
+           return validateEmail(email) 
+           
+        }
     },
     {
         type: "input",
@@ -64,7 +68,11 @@ const engineerQs = [
     {
         type: "input",
         name: "engineerEmail",
-        message: "What is the engineer's email address?"
+        message: "What is the engineer's email address?",
+        validate: function (email) {
+            return validateEmail(email) 
+            
+         }
     },
     {
         type: "input",
@@ -88,7 +96,11 @@ const internQs = [
     {
         type: "input",
         name: "internEmail",
-        message: "What is the intern's email address?"
+        message: "What is the intern's email address?",
+         validate: function (email) {
+           return validateEmail(email) 
+           
+        }
     },
     {
         type: "input",
@@ -148,7 +160,7 @@ const askIQuestions = async (internQs) => {
 //     }else{
 
 const createHTML = () => {
-    fs.writeFile("team.html", render(team), function (err) {
+    fs.writeFile(outputPath, render(team), function (err) {
         if (err) {
             throw err;
         }
@@ -157,6 +169,17 @@ const createHTML = () => {
 // console.log(answers);
 
 //===========================
+
+//============VALIDATE EMAIL ADDRESSES W REGEX
+
+function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if( re.test(email)) {
+            return(true)
+        }else{
+            return('Please enter a valid email address')
+        };
+}
 
 //=========CALL QUESTIONS
 const init = async () => {
@@ -170,7 +193,8 @@ const init = async () => {
         console.log(newMan);
         team.push(newMan);
         console.log(team);
-        createHTML();
+        // createHTML();
+        init()
         //create new M class
 
         //once created push to an array 
@@ -182,7 +206,8 @@ const init = async () => {
         console.log(newEng);
         team.push(newEng);
         console.log(team);
-        createHTML();
+        // createHTML();
+        init()
 
     } else if (addTeamMember === "Intern") {
         const userAnswers = await askIQuestions(internQs);
@@ -191,10 +216,11 @@ const init = async () => {
         console.log(newInt);
         team.push(newInt);
         console.log(team);
+        // createHTML();
+        init()
+    } else {
         createHTML();
 
-        // } else {
-        //     createHTML();
     };
 }
 
